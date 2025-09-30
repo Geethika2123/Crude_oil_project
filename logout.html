@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logging Out...</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ url_for('home') }}";
+        }, 2000);
+    </script>
+</head>
+<body>
+    <div class="container mt-5">  <div class="alert alert-info" role="alert">  <h4 class="alert-heading">You have been logged out</h4>  <p>Redirecting to the home page...</p>
+        </div>
+    </div>
+</body>
+</html>

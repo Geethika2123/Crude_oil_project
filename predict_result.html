@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Add this style block to make the text white */
+        body {
+            color: white;
+        }
+        .table th, .table td {
+            color: white; /* Ensure table headers and data are white */
+        }
+        p, strong {
+            color: white; /* Ensure paragraphs and strong elements are white */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Prediction Result</h2>
+        <p><strong>Start Date:</strong> {{ start_date }}</p>
+
+        {% if days > 1 %}
+        <p><strong>Predictions for the next {{ days }} days:</strong></p>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Predicted Price</th>
+                    {% if not future %}
+                    <th>Actual Price</th>
+                    <th>Absolute Error</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.date }}</td>
+                    <td>{{ result.predicted | round(4) }}</td>
+                    {% if not future %}
+                    <td>{{ result.actual | round(4) }}</td>
+                    <td>{{ result.error | round(4) }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p><strong>Predicted Price:</strong> {{ predicted | round(4) }}</p>
+        {% if future %}
+        <p><strong>Actual Price:</strong> <span class="text-muted">Not available (Future Date)</span></p>
+        {% else %}
+        <p><strong>Actual Price:</strong> {{ actual | round(4) }}</p>
+        <p><strong>Absolute Error:</strong> {{ error | round(4) }}</p>
+        {% endif %}
+        {% endif %}
+
+        <a href="{{ url_for('predict') }}" class="btn btn-primary mt-3">Predict Another Date</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-secondary mt-3 ml-2">Logout</a>
+    </div>
+</body>
+</html>

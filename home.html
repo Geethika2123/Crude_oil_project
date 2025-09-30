@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crude oil price predictor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">  <div class="container">
+            <a class="navbar-brand" href="#">Crude oil price predictor</a>
+            <div class="nav-links">
+                {% if username %}
+                <span class="text-white">Welcome, {{ username }} ({{ email }})</span>
+                <a href="{{ url_for('logout') }}" class="btn btn-danger ml-3">Logout</a>  {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>  {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">  <div class="jumbotron">  <h2 class="display-4">Welcome to Crude oil price predictor</h2>  <p class="lead">Our AI-powered system helps detect potential crude oil prediction from user data.</p>  </div>
+    </div>
+</body>
+</html>
